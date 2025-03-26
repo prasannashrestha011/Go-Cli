@@ -55,7 +55,7 @@ func GetFilesAndDirs() []string {
 }
 
 func IsIgnored(filePath string, ignoredPatterns []string) bool {
-	// Check if the filePath itself matches any pattern
+	// checks file pattern
 	for _, pattern := range ignoredPatterns {
 		matched, _ := filepath.Match(pattern, filePath)
 		if matched {
@@ -66,7 +66,6 @@ func IsIgnored(filePath string, ignoredPatterns []string) bool {
 	// Check all parent directories of the filePath
 	currentDir := filepath.Dir(filePath)
 	for {
-		// Check if current directory matches any pattern
 		for _, pattern := range ignoredPatterns {
 			matched, _ := filepath.Match(pattern, currentDir)
 			if matched {
@@ -74,12 +73,12 @@ func IsIgnored(filePath string, ignoredPatterns []string) bool {
 			}
 		}
 
-		// Break if we've reached the root directory
 		parentDir := filepath.Dir(currentDir)
 		if parentDir == currentDir {
-			break
+			break //exit if reached to root dir
 		}
 		currentDir = parentDir
+
 	}
 
 	return false
