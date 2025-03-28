@@ -102,3 +102,17 @@ func Ignore_Files_n_Dirs() []string {
 	}
 	return ignore_list
 }
+
+func Add_Dir_n_files() {
+	list := GetFilesAndDirs()
+	file_path := configs.VcrDirPath + "/index"
+	file, err := os.OpenFile(file_path, os.O_RDWR|os.O_TRUNC, 0644)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer file.Close()
+	for _, target_pattern := range list {
+		file.WriteString(target_pattern + "\n")
+	}
+}

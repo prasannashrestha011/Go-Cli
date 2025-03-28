@@ -24,3 +24,7 @@ func InitCmd(cmd *cobra.Command, args []string) {
 func ListCmd(cmd *cobra.Command, args []string) {
 	GetFilesAndDirs()
 }
+
+func AddCmd(cmd *cobra.Command, args []string) {
+	Add_Dir_n_files()
+}
